@@ -8,3 +8,4 @@ SpeechRecognition
 pyttsx3
 google.generativeai
 pyaudio
+pillow
