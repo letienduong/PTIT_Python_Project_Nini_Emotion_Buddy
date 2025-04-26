@@ -1,0 +1,24 @@
+# Bỏ môi trường ảo và cache Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Bỏ file hệ thống của PyCharm/IDE
+.idea/
+.vscode/
+
+# Bỏ file hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Bỏ file âm thanh tạm
+*.mp3
+*.log
+
+# Ignore tạm nếu bạn có model/dữ liệu lớn
+*.h5
+*.pt
+*.onnx
+*.zip
