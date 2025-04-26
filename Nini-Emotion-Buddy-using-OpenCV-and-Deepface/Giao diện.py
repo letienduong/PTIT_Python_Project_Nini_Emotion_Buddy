@@ -106,7 +106,7 @@ def on_camera():
     if emotion:
         prompt = f"Tôi đang cảm thấy {emotion}. Bạn có thể giúp tôi không?"
         chat_history.config(state='normal')
-        chat_history.insert(tk.END, f"📷 [Nhận diện cảm xúc]: {emotion}\n", "emotion")
+        chat_history.insert(tk.END, f"\n📷 [Nhận diện cảm xúc]: {emotion}\n", "emotion")
         chat_history.config(state='disabled')
         chat_history.yview(tk.END)
         msg_entry.delete(0, tk.END)
