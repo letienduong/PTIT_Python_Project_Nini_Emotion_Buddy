@@ -18,7 +18,6 @@ genai.configure(api_key=GEMINI_API_KEY)
 engine = pyttsx3.init()
 # Lấy danh sách giọng đọc
 voices = engine.getProperty('voices')
-voices = engine.getProperty('voices')
 
 # Chọn giọng nữ (thường giọng nữ có index 1, nhưng bạn có thể duyệt hết để chắc chắn)
 engine.setProperty('voice', voices[1].id)
