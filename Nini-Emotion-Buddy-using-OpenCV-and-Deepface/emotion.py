@@ -26,7 +26,7 @@ def run_emotion_detection():
     all_detected_genders = []
     # Set start time for timing
     start_time = time.time()
-    duration = 10
+    duration = 6
 
     # Main loop for data collection
     while time.time() - start_time < duration:

@@ -11,6 +11,7 @@ import playsound
 import os
 import pygame
 import threading
+import re
 
 # Cấu hình API key Gemini
 GEMINI_API_KEY = "AIzaSyCFmSl564k-mwDy_7wY83-VaZqkU2HbHqU"  # <-- Thay bằng key của bạn
@@ -23,7 +24,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)
 
 # Giảm tốc độ đọc cho nhẹ nhàng hơn
-engine.setProperty('rate', 150)  # tốc độ thấp hơn một chút
+engine.setProperty('rate', 200)  # tốc độ thấp hơn một chút
 engine.setProperty('volume', 1.0)  # tăng âm lượng cho ấm áp
 
 MODEL_NAME = "gemini-2.0-flash"
@@ -92,9 +93,12 @@ def on_send():
 
     # Nếu Voice Chat bật thì chạy song song đọc và hiện chữ
     if checkbox_var.get():
-        cute_reply = reply.replace("Tôi", "Nini").replace("mình", "Nini").replace("bạn", "bạn iu")
-        threading.Thread(target=speak_vi, args=(reply,), daemon=True).start()
+        # Làm sạch text chỉ dùng cho giọng nói
+        text_to_speak = re.sub(r'[^A-Za-zÀ-ỹà-ỹ0-9\s\.\,\?\!\:\;]', '', reply)
+        # Đọc giọng nói song song
+        threading.Thread(target=speak_vi, args=(text_to_speak,), daemon=True).start()
 
+    # Hiển thị từ từ văn bản gốc (không bị làm sạch)
     threading.Thread(target=display_and_speak, daemon=True).start()
 
 def on_camera():
@@ -135,8 +139,6 @@ def recognize_speech():
 # Hàm phát âm tiếng Việt
 def speak_vi(text):
     try:
-        # Chia nhỏ câu theo dấu câu lớn
-        import re
         sentences = re.split(r'(?<=[.!?…]) +', text)
 
         pygame.mixer.init()
